@@ -42,7 +42,7 @@ function App() {
   const [usuarioSeleccionado, setUsuarioSeleccionado]=useState({
     nombre: '',
     apellido: ''
-  })
+  });
   
   const handleChange=e=>{
     const {name, value}=e.target;
@@ -51,14 +51,14 @@ function App() {
       [name]: value
     }))
     console.log(usuarioSeleccionado);
-  }
+  };
 
   const peticionGet = async() =>{
     await axios.get(baseURL)
       .then( res => {
         setData(res.data);
       })
-  }
+  };
 
   const peticionPost=async()=>{
     await axios.post(baseURL, usuarioSeleccionado)
@@ -66,7 +66,7 @@ function App() {
       setData(data.concat(res.data))
       abrirCerrarModalInsertar()
     })
-  }
+  };
 
   const peticionPut=async()=>{
     await axios.put(baseURL+usuarioSeleccionado.id, usuarioSeleccionado)
@@ -81,7 +81,7 @@ function App() {
       setData(dataNueva);
       abrirCerrarModalEditar();
     })
-  }
+  };
 
   const peticionDelete=async()=>{
     await axios.delete(baseURL+usuarioSeleccionado.id)
@@ -89,24 +89,24 @@ function App() {
       setData(data.filter(usuario=>usuario.id !== usuarioSeleccionado.id));
       abrirCerrarModalEliminar();
     })
-  }
+  };
 
   const abrirCerrarModalInsertar = () => {
     setModalInsertar(!modalInsertar);
-  }
+  };
 
   const abrirCerrarModalEditar=()=>{
     setModalEditar(!modalEditar);
-  }
+  };
 
   const abrirCerrarModalEliminar=()=>{
     setModalEliminar(!modalEliminar);
-  }
+  };
 
   const seleccionarUsuario=(usuario, caso)=>{
     setUsuarioSeleccionado(usuario);
     (caso==='Editar')?abrirCerrarModalEditar():abrirCerrarModalEliminar()
-  }
+  };
 
   const bodyInsertar=(
     <div className={styles.modal}>
@@ -134,7 +134,7 @@ function App() {
         <Button onClick={()=>abrirCerrarModalEditar()}>Cancelar</Button>
       </div>
     </div>
-  )
+  );
 
   const bodyEliminar=(
     <div className={styles.modal}>
@@ -144,7 +144,7 @@ function App() {
         <Button onClick={()=>abrirCerrarModalEliminar()}>No</Button>
       </div>
     </div>
-  )
+  );
 
 
   return (
